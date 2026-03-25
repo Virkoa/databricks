@@ -47,7 +47,8 @@ jobs:
       - name: Deploy notebooks via Databricks bundle
         run: |
           databricks bundle validate --target dev
-          databricks bundle deploy
+          databricks bundle deploy --target dev
+
 
 
 
