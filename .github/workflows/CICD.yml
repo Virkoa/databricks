@@ -21,11 +21,10 @@ jobs:
     runs-on: ubuntu-latest
     # map GitHub env name if you want (optional)
     environment: ${{ github.event.inputs.target == 'prod' && 'PROD' || 'DEV' }}
-
     env:
-      DATABRICKS_HOST: https://adb-7405614436466627.7.azuredatabricks.net/
-      DATABRICKS_AUTH_TYPE: azure-cli
       TARGET: ${{ github.event.inputs.target }}
+      DATABRICKS_AUTH_TYPE: azure-cli
+      DATABRICKS_HOST: ${{ github.event.inputs.target == 'prod' && 'https://adb-7405612125064090.10.azuredatabricks.net/' || 'https://adb-7405614436466627.7.azuredatabricks.net/' }}
 
     steps:
       - uses: actions/checkout@v4
