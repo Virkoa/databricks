@@ -21,5 +21,3 @@ resources:
       # but SINGLE_USER is the usual for SP-based clusters
       data_security_mode: "SINGLE_USER"
 
-      # Must match the SP’s Databricks userName from `current-user me`
-      single_user_name: "ygorbe@gmail.com"   # <- use the exact value from "userName"
