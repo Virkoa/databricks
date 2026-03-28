@@ -2,36 +2,28 @@ resources:
   clusters:
     andrejs_cluster:
       cluster_name: "Andrejs_Cluster"
+
+      # Single-node
       num_workers: 0
+
+      # Node type – adjust to a valid small node in your workspace
       node_type_id: "Standard_DS3_v2"
-      enable_photon: false
+
+      # Runtime – adjust to a valid one in your workspace
+      spark_version: "13.3.x-scala2.12"
+
+      # Single-node-specific config
+      spark_conf:
+        spark.databricks.cluster.profile: "singleNode"
+        spark.master: "local[*]"
+
+      # Auto-termination after 120 minutes
       autotermination_minutes: 120
-      spark_version: "13.3.x-scala2.12"
-      data_security_mode: "LEGACY_SINGLE_USER"
+
+      # Tags (required for single-node + your custom tag)
       custom_tags:
+        ResourceClass: "SingleNode"
         dev: "dtb_cluster"
-      cluster_source: "UI"
 
-    another_cluster:
-      cluster_name: "Another_Cluster"
-      num_workers: 2
-      node_type_id: "Standard_DS3_v2"
-      enable_photon: true
-      autotermination_minutes: 60
-      spark_version: "13.3.x-scala2.12"
-      data_security_mode: "LEGACY_SINGLE_USER"
-      custom_tags:
-        env: "dev"
-      cluster_source: "UI"
-
-    yet_another_cluster:
-      cluster_name: "Yet_Another_Cluster"
-      num_workers: 4
-      node_type_id: "Standard_DS3_v2"
-      enable_photon: false
-      autotermination_minutes: 30
-      spark_version: "13.3.x-scala2.12"
-      data_security_mode: "LEGACY_SINGLE_USER"
-      custom_tags:
-        env: "prod"
-      cluster_source: "UI"
+      # Optional but common in UC setups; adjust as needed:
+      # data_security_mode: "LEGACY_SINGLE_USER"
