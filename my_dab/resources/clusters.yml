@@ -3,12 +3,9 @@ resources:
     andrejs_cluster:
       cluster_name: "Andrejs_Cluster"
 
-      # Single node
       num_workers: 0
-
-      # Adjust to valid values in *this* workspace
-      node_type_id: "Standard_DS3_v2"
-      spark_version: "13.3.x-scala2.12"
+      node_type_id: "Standard_DS3_v2"          # adjust if needed
+      spark_version: "13.3.x-scala2.12"        # adjust if needed
 
       spark_conf:
         spark.databricks.cluster.profile: "singleNode"
@@ -20,11 +17,9 @@ resources:
         ResourceClass: "SingleNode"
         dev: "dtb_cluster"
 
-      # Force allowed UC access mode
+      # UC access mode – adjust if your workspace uses a different one,
+      # but SINGLE_USER is the usual for SP-based clusters
       data_security_mode: "SINGLE_USER"
 
-      # CRITICAL: Must match the Databricks identity that will own this cluster
-      # If you're deploying as a human user:
-      #   your_user@company.com (exactly as shown in the workspace UI)
-      # If deploying as a service principal:
-      #   service-principal object id or whatever Databricks shows for that SP
+      # Must match the SP’s Databricks userName from `current-user me`
+      single_user_name: "ygorbe@gmail.com"   # <- use the exact value from "userName"
