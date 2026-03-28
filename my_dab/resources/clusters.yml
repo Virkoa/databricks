@@ -3,27 +3,28 @@ resources:
     andrejs_cluster:
       cluster_name: "Andrejs_Cluster"
 
-      # Single-node
+      # Single node
       num_workers: 0
 
-      # Node type – adjust to a valid small node in your workspace
+      # Adjust to valid values in *this* workspace
       node_type_id: "Standard_DS3_v2"
-
-      # Runtime – adjust to a valid one in your workspace
       spark_version: "13.3.x-scala2.12"
 
-      # Single-node-specific config
       spark_conf:
         spark.databricks.cluster.profile: "singleNode"
         spark.master: "local[*]"
 
-      # Auto-termination after 120 minutes
       autotermination_minutes: 120
 
-      # Tags (required for single-node + your custom tag)
       custom_tags:
         ResourceClass: "SingleNode"
         dev: "dtb_cluster"
 
-      # Optional but common in UC setups; adjust as needed:
-      # data_security_mode: "LEGACY_SINGLE_USER"
+      # Force allowed UC access mode
+      data_security_mode: "SINGLE_USER"
+
+      # CRITICAL: Must match the Databricks identity that will own this cluster
+      # If you're deploying as a human user:
+      #   your_user@company.com (exactly as shown in the workspace UI)
+      # If deploying as a service principal:
+      #   service-principal object id or whatever Databricks shows for that SP
