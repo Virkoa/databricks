@@ -30,7 +30,7 @@ jobs:
         if: ${{ github.event.inputs.target == 'prod' && github.ref != 'refs/heads/prod' }}
         run: |
           echo "Prod deployments are only allowed from main. Current ref: $GITHUB_REF"
-          exit 1
+          exit 78
 
       - uses: actions/checkout@v4
 
