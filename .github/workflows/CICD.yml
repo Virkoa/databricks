@@ -27,7 +27,7 @@ jobs:
 
     steps:
       - name: Fail if trying to deploy prod from non‑main branch
-        if: ${{ github.event.inputs.target == 'prod' && github.ref != 'refs/heads/main' }}
+        if: ${{ github.event.inputs.target == 'prod' && github.ref != 'refs/heads/prod' }}
         run: |
           echo "Prod deployments are only allowed from main. Current ref: $GITHUB_REF"
           exit 1
