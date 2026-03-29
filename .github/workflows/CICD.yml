@@ -19,7 +19,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # map GitHub env name if you want (optional)
     environment: ${{ github.event.inputs.target == 'prod' && 'PROD' || 'DEV' }}
     env:
       TARGET: ${{ github.event.inputs.target }}
@@ -27,6 +26,12 @@ jobs:
       DATABRICKS_HOST: ${{ github.event.inputs.target == 'prod' && 'https://adb-7405612125064090.10.azuredatabricks.net/' || 'https://adb-7405614436466627.7.azuredatabricks.net/' }}
 
     steps:
+      - name: Fail if trying to deploy prod from non‑main branch
+        if: ${{ github.event.inputs.target == 'prod' && github.ref != 'refs/heads/main' }}
+        run: |
+          echo "Prod deployments are only allowed from main. Current ref: $GITHUB_REF"
+          exit 1
+
       - uses: actions/checkout@v4
 
       - name: Login to Azure
