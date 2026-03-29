@@ -4,8 +4,8 @@ resources:
       cluster_name: "Andrejs_Cluster"
 
       num_workers: 0
-      node_type_id: "Standard_DS3_v2"          # adjust if needed
-      spark_version: "13.3.x-scala2.12"        # adjust if needed
+      node_type_id: "Standard_DS3_v2"
+      spark_version: "13.3.x-scala2.12"
 
       spark_conf:
         spark.databricks.cluster.profile: "singleNode"
@@ -17,7 +17,23 @@ resources:
         ResourceClass: "SingleNode"
         dev: "dtb_cluster"
 
-      # UC access mode – adjust if your workspace uses a different one,
-      # but SINGLE_USER is the usual for SP-based clusters
       data_security_mode: "SINGLE_USER"
 
+    other_cluster:
+      cluster_name: "Other_Cluster"
+
+      num_workers: 0
+      node_type_id: "Standard_DS3_v2"
+      spark_version: "13.3.x-scala2.12"
+
+      spark_conf:
+        spark.databricks.cluster.profile: "singleNode"
+        spark.master: "local[*]"
+
+      autotermination_minutes: 120
+
+      custom_tags:
+        ResourceClass: "SingleNode"
+        dev: "dtb_cluster"
+
+      data_security_mode: "SINGLE_USER"
